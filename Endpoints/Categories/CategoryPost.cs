@@ -16,7 +16,12 @@ public class CategoryPost
         var category = new Category(categoryRequest.Name, "Test","Teste");
 
         if (!category.IsValid)
-            return Results.BadRequest(category.Notifications);
+        {
+            var errors = category.Notifications
+                .GroupBy(g => g.Key)
+                .ToDictionary(g => g.Key, g => g.Select(x => x.Message).ToArray());
+            return Results.ValidationProblem(errors);
+        }
 
         context.Categories.Add(category);
         context.SaveChanges();
