@@ -13,13 +13,7 @@ public class CategoryPost
         /*          Validação sem Flunt Validation
          * if (string.IsNullOrEmpty(categoryRequest.Name))
             return Results.BadRequest("Name is required");*/
-        var category = new Category(categoryRequest.Name)
-        {
-            CreatedBy = "test creat",
-            CreatedOn = DateTime.Now,
-            EditedBy =  "Test edit",
-            EditedOn = DateTime.Now,
-        };
+        var category = new Category(categoryRequest.Name, "Test","Teste");
 
         if (!category.IsValid)
             return Results.BadRequest(category.Notifications);
