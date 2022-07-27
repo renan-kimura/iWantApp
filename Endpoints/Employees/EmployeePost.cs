@@ -15,8 +15,8 @@ public class EmployeePost
         var user = new IdentityUser { UserName = employeeRequest.Email, Email = employeeRequest.Email };
         var result = userManager.CreateAsync(user,employeeRequest.password).Result;
 
-        if(!result.Succeeded)
-            return Results.BadRequest(result.Errors.First());
+        if (!result.Succeeded)
+            return Results.ValidationProblem(result.Errors.ConvertToProblemDetails());
 
         var userClaims = new List<Claim>
         {
