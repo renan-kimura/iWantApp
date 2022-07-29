@@ -1,5 +1,6 @@
 ﻿using IWantApp.Domain.Products;
 using IWantApp.Infra.Dados;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IWantApp.Endpoints.Categories;
 
@@ -8,11 +9,10 @@ public class CategoryPost
     public static string Template => "/categories";
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
+    
+    [Authorize]
     public static IResult Action(CategoryRequest categoryRequest, ApplicationDbContext context)
     {
-        /*          Validação sem Flunt Validation
-         * if (string.IsNullOrEmpty(categoryRequest.Name))
-            return Results.BadRequest("Name is required");*/
         var category = new Category(categoryRequest.Name, "Test","Teste");
 
         if (!category.IsValid)

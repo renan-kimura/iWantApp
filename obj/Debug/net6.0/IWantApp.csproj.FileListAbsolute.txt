@@ -66,3 +66,4 @@ C:\Users\Renan\source\repos\IWantApp\bin\Debug\net6.0\Microsoft.AspNetCore.Ident
 C:\Users\Renan\source\repos\IWantApp\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Renan\source\repos\IWantApp\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Renan\source\repos\IWantApp\bin\Debug\net6.0\Dapper.dll
+C:\Users\Renan\source\repos\IWantApp\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
