@@ -10,8 +10,9 @@ public class EmployeeGetAll
     public static Delegate Handle => Action;
 
     [Authorize(Policy = "Employee006Policy")] //apenas o EmployeeCode 006 terá acesso
-    public static IResult Action(int? page, int? rows, QueryAllUserWithClaimName query)
+    public static async Task<IResult> Action(int? page, int? rows, QueryAllUserWithClaimName query)
     {
-        return Results.Ok(query.Execute(page.Value, rows.Value));
+        var result = await query.Execute(page.Value, rows.Value);
+        return Results.Ok(result);
     }
 }
