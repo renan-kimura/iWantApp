@@ -4,7 +4,9 @@ using IWantApp.Endpoints.Security;
 using IWantApp.Infra.Dados;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -79,6 +81,16 @@ app.MapMethods(EmployeePost.Template, EmployeePost.Methods, EmployeePost.Handle)
 app.MapMethods(EmployeeGetAll.Template, EmployeeGetAll.Methods, EmployeeGetAll.Handle);
 app.MapMethods(TokenPost.Template, TokenPost.Methods, TokenPost.Handle);
 
+app.UseExceptionHandler("/error");
+app.Map("/error", (HttpContext http) =>
+{
+    var error = http.Features?.Get<IExceptionHandlerFeature>()?.Error;
 
-
+    if(error != null)
+    {
+        if(error is SqlException)
+            return Results.Problem(title: "Database out", statusCode: 500);
+    }
+    return Results.Problem(title: "An error occurred", statusCode: 500);
+});
 app.Run();
