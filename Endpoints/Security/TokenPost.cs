@@ -13,9 +13,13 @@ public class TokenPost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
     [AllowAnonymous]
-    public static IResult Action(LoginRequest loginRequest, IConfiguration configuration, UserManager<IdentityUser> userManager)
+    public static IResult Action(LoginRequest loginRequest, IConfiguration configuration, UserManager<IdentityUser> userManager, ILogger<TokenPost> log)
     {
-       var user = userManager.FindByEmailAsync(loginRequest.Email).Result;
+        log.LogInformation("Getting token");
+        log.LogWarning("Warning");
+        log.LogError("Error");
+
+        var user = userManager.FindByEmailAsync(loginRequest.Email).Result;
         if (user == null) 
             Results.BadRequest();
         if (!userManager.CheckPasswordAsync(user, loginRequest.Password).Result)
