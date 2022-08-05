@@ -15,9 +15,9 @@ public class TokenPost
     [AllowAnonymous]
     public static IResult Action(LoginRequest loginRequest, IConfiguration configuration, UserManager<IdentityUser> userManager, ILogger<TokenPost> log)
     {
-        log.LogInformation("Getting token");
+        /*log.LogInformation("Getting token");
         log.LogWarning("Warning TESTE");
-        log.LogError("Error TEST");
+        log.LogError("Error TEST");*/
 
         var user = userManager.FindByEmailAsync(loginRequest.Email).Result;
         if (user == null) 
@@ -42,7 +42,7 @@ public class TokenPost
                     new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Audience = configuration["JwtBearerTokenSettings:Audience"],
             Issuer = configuration["JwtBearerTokenSettings:Issuer"],
-            Expires = DateTime.UtcNow.AddSeconds(300)
+            Expires = DateTime.UtcNow.AddSeconds(3600)
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
