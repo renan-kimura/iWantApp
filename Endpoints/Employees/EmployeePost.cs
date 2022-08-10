@@ -14,7 +14,7 @@ public class EmployeePost
     {
         var userId = http.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
         var newUser = new IdentityUser { UserName = employeeRequest.Email, Email = employeeRequest.Email };
-        var result = await userManager.CreateAsync(newUser,employeeRequest.password);
+        var result = await userManager.CreateAsync(newUser,employeeRequest.Password);
 
         if (!result.Succeeded)
             return Results.ValidationProblem(result.Errors.ConvertToProblemDetails());
