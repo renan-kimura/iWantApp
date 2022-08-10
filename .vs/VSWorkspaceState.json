@@ -3,8 +3,10 @@
     "",
     "\\Endpoints",
     "\\Endpoints\\Categories",
-    "\\Endpoints\\Products"
+    "\\Endpoints\\Products",
+    "\\Endpoints\\Security",
+    "\\Infra"
   ],
-  "SelectedNode": "\\IWantApp.csproj",
+  "SelectedNode": "\\IWantApp.sln",
   "PreviewInSolutionExplorer": false
 }
