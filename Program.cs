@@ -50,6 +50,8 @@ builder.Services.AddAuthorization(options =>
         p.RequireAuthenticatedUser().RequireClaim("EmployeeCode"));
     options.AddPolicy("Employee006Policy", p =>
         p.RequireAuthenticatedUser().RequireClaim("EmployeeCode","006"));
+    options.AddPolicy("CpfPolicy", p =>
+        p.RequireAuthenticatedUser().RequireClaim("Cpf"));
 });
 
 builder.Services.AddAuthentication(x =>
@@ -104,6 +106,8 @@ app.MapMethods(ProductGetAll.Template, ProductGetAll.Methods, ProductGetAll.Hand
 app.MapMethods(ProductGetShowcase.Template, ProductGetShowcase.Methods, ProductGetShowcase.Handle);
 app.MapMethods(ClientPost.Template, ClientPost.Methods, ClientPost.Handle);
 app.MapMethods(ClientGet.Template, ClientGet.Methods, ClientGet.Handle);
+app.MapMethods(OrderPost.Template, OrderPost.Methods, OrderPost.Handle);
+
 
 
 app.UseExceptionHandler("/error");
